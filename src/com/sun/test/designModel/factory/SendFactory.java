@@ -1,6 +1,11 @@
 package com.sun.test.designModel.factory;
 
 public class SendFactory {
+    /**
+     * 简单工厂
+     * @param type
+     * @return
+     */
     public Sender produce(String type) {
         if ("mail".equals(type)) {
             return new MailSender();
