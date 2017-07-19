@@ -1,5 +1,7 @@
 package com.sun.test.designModel.prototype;
 
+import java.io.*;
+
 /**
  * 原型模式（Prototype）
  * <p>
@@ -7,9 +9,55 @@ package com.sun.test.designModel.prototype;
  * 对其进行复制、克隆，产生一个和原对象类似的新对象。本小结会通过对象的复制，进行讲解。在Java中，复制对象是通过clone()实现的
  * Created by sunleic on 2017/7/18.
  */
-public class Prototype implements Cloneable {
+class Prototype implements Cloneable,Serializable {
+
+
+    private static final long serialVersionUID = 1L;
+
+    private String string;
+
+    private SerializableObject obj;
+
+    /**
+     * 浅复制
+     * @return
+     * @throws CloneNotSupportedException
+     */
     public Object clone() throws CloneNotSupportedException {
         Prototype prototype = (Prototype) super.clone();
         return prototype;
+    }
+
+
+    /**
+     * 深复制
+     */
+    public Object deepClone() throws IOException, CloneNotSupportedException, ClassNotFoundException {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutputStream oos  = new ObjectOutputStream(bos);
+
+        oos.writeObject(this);
+
+        ByteArrayInputStream bis = new ByteArrayInputStream(bos.toByteArray());
+        ObjectInputStream ois = new ObjectInputStream(bis);
+
+        return  ois.readObject();
+
+    }
+
+    public String getString(){
+        return string;
+    }
+
+    public void setString(String string){
+        this.string = string;
+    }
+
+    public SerializableObject getObj(){
+        return obj;
+    }
+
+    public void setObj(SerializableObject  obj){
+        this.obj = obj;
     }
 }
