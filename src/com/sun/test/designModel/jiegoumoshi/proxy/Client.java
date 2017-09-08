@@ -1,4 +1,4 @@
-package com.sun.test.designModel._结构类模式区分.proxy;
+package com.sun.test.designModel.jiegoumoshi.proxy;
 
 /**
  * Created by sunleic on 2017/8/4.
